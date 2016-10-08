@@ -17,6 +17,7 @@
     "angular-mocks": "^1.5.6",
     "angular-route": "^1.5.6",
     "angular-sanitize": "^1.5.6",
+    "gulp-install": "^0.6.0",
     "ng-draggable": "^1.0.0"
   },
   "devDependencies": {
