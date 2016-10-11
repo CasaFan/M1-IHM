@@ -24,6 +24,18 @@ function controller($scope, CommService) {
             $scope.$applyAsync();
         });
     }
+    
+    this.play = function(mediaRendererId){
+        CommService.play(mediaRendererId);
+    }
+
+    this.pause = function(mediaRendererId){
+        CommService.pause(mediaRendererId);
+    }
+
+    this.stop = function(mediaRendererId){
+        CommService.stop(mediaRendererId);
+    }
 }
 controller.$inject = ["$scope", "CommService"];
 

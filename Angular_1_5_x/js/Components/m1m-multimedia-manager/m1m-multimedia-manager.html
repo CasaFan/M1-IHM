@@ -5,7 +5,18 @@
         <li ng-repeat="renderer in $ctrl.mediaRenderers">
             <details>
                 <summary>{{renderer.name}}</summary>
-                {{renderer | json}}
+                <!-- {{renderer | json}} -->
+                
+                <div>
+                    <img ng-src="{{renderer.iconURL}}" alt="deviceIcon" style="width:200px; height:200px;"/>
+                    <hr style="width:200px; -webkit-margin-before: 0em; margin-left:0; margin-top:5px;">
+                </div>
+                
+                <div>
+                    <img ng-click="$ctrl.play(renderer.id)" ng-src="images/play.svg" style="width:50px; height:50px; " alt="playBtn"></img>
+                    <img ng-click="$ctrl.pause(renderer.id)" ng-src="images/pause.svg" style="width:50px; height:50px; margin-left:16px;" alt="pauseBtn"></img>
+                    <img ng-click="$ctrl.stop(renderer.id)" ng-src="images/stop.svg" style="width:50px; height:50px; margin-left:16px;" alt="stopBtn"></img>
+                </div>
             </details>
         </li>
     </ul>
@@ -19,6 +30,7 @@
                 <summary>{{server.name}}</summary>
                 <p ng-dblclick="$ctrl.browse(server.id)">
                     {{server | json}}
+                    <img ng-src="{{server.iconURL}}" alt="serverIcon"/>
                 </p>
                 <a ng-repeat="obj in $ctrl.directories" ng-dblclick="$ctrl.browse(server.id, obj.directory)">
                     {{obj.name}}
