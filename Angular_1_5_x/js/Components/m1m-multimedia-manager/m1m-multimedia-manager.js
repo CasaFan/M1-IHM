@@ -3,34 +3,25 @@ var angular		        = require( "angular" ),
     angularMaterial		= require( "angular-material" ),
     ngDraggable 		= require( "ng-draggable" ),
     template            = require( "./m1m-multimedia-manager.html" ),
-    m1mMedia            = require("./../m1m-media-module/m1m-media.js")
+    //m1mMediaRenders     = require("./../m1m-mediaRender-manager/m1m-mediaRender-manager.js"),
+    m1mServers           = require("./../m1m-server-manager/m1m-server-manager.js")
     ;
 module.exports = "m1m-multimedia-manager-Module";
 
 console.log( "Init of m1m-multimedia-manager-Module", CommModule, angularMaterial, ngDraggable);
 
 function controller($scope, CommService) {
-    var ctrl = this;
+    //var ctrl = this;
     $scope.vol = 50;
-    $scope.dropppedObj = [];
 
     console.log( "m1mMultimediaManager:", $scope, CommService );
     this.mediaRenderers = CommService.mediaRenderers;
-    this.mediaServers   = CommService.mediaServers;
-
     // TODO : getVolumeLecteur
     
     CommService.onupdate = function() {
         $scope.$applyAsync(); // Mise à jour du rendu
     };
-    this.browse = function( mediaServerId, directoryId ) {
-        CommService.browse( mediaServerId, directoryId ).then( function(data) {
-            console.log( "Browse", mediaServerId, directoryId, "=>", data );
-            ctrl.directories = data.directories;
-            ctrl.medias = data.medias;
-            $scope.$applyAsync();
-        });
-    }
+    
     
     this.play = function(mediaRendererId){
         CommService.play(mediaRendererId);
@@ -53,18 +44,18 @@ function controller($scope, CommService) {
         this.play(mediaRendererId);
         console.log("media loaded ");
     }
-    /*
+    
     $scope.onDropComplete = function(mediaRendererId){
-        console.log("drop down ");
+        console.log("droped down ");
         CommService.loadMedia(mediaRendererId, this.dropppedObj.serverId, this.dropppedObj.mediaId);
         this.play(mediaRendererId);
     }
-    */
+    
     
 }
 controller.$inject = ["$scope", "CommService"];
 
-angular .module     ( module.exports, [CommModule, angularMaterial, "ngDraggable", m1mMedia] )
+angular .module     ( module.exports, [CommModule, angularMaterial, "ngDraggable", m1mServers] )
         .component  ( "m1mMultimediaManager", {
             controller  : controller,
             bindings    : {title: "@"},

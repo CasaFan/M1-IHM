@@ -1,6 +1,8 @@
 <h2>{{$ctrl.title}}</h2>
+
 <section>
     <h3>Liste des lecteurs UPnP/DLNA</h3>
+    <!--m1m-mediaRender-manager></m1m-mediaRender-manager-->
     <ul>
         <li ng-repeat="renderer in $ctrl.mediaRenderers">
             <details>
@@ -30,17 +32,18 @@
                 
             </details>
         </li>
-    </ul>
+    </ul-->
 </section>
 
 <section>
     <h3>Liste des serveurs UPnP/DLNA</h3>
-    <ul>
+    <m1m-server-manager></m1m-server-manager>
+    <!--ul>
         <li ng-repeat="server in $ctrl.mediaServers">
             <details>
                 <summary>{{server.name}}</summary>
                 <p ng-dblclick="$ctrl.browse(server.id)">
-                    <!-- {{server | json}} -->
+                    <!-- {{server | json}} >
                     <img ng-src="{{server.iconURL}}" alt="serverIcon" style="width:100px; height:100px; "/>
                 </p>
                 <div ng-repeat="obj in $ctrl.directories" ng-dblclick="$ctrl.browse(server.id, obj.directory)" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
@@ -54,7 +57,7 @@
                         ressource, class} 
                         -->
 
-                <!-- loadMedia   : function(mediaRendererId, mediaServerId /*media.serverId*/, itemId /*(media.mediaId)*/) -->
+                <!-- loadMedia   : function(mediaRendererId, mediaServerId /*media.serverId*/, itemId /*(media.mediaId)*/) >
 
                 <div ng-repeat="media in $ctrl.medias" ng-drag-data="{{media}}" data-allow-transform="true" ng-drag="true" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
                     <img ng-src="{{media.icon}}" />
@@ -62,8 +65,8 @@
                 </div> 
 
                 <!-- TODO module : media(display) -->
-                <!-- m1m-media-module></m1m-media-module-->
+                <!-- m1m-media-module></m1m-media-module>
             </details>
         </li>
-    </ul>
+    </ul-->
 </section>

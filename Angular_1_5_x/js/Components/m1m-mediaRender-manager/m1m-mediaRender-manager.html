@@ -1,0 +1,32 @@
+<ul>
+	<li ng-repeat="renderer in $ctrl.mediaRenderers">
+		<details>
+			<summary>{{renderer.name}}</summary>
+			<!-- {{renderer | json}} -->
+
+			<div>
+				<img ng-src="{{renderer.iconURL}}" ng-drop="true" ng-drop-success="$ctrl.loadMedia(renderer.id, $data.serverId, $data.mediaId)"
+					alt="deviceIcon" style="width:200px; height:200px;" />
+
+				<md-slider-container flex style="display:inline-block; margin-left:50px; -webkit-inline-box">
+					<md-input-container>
+						<input flex type="number" ng-model="vol" aria-label="volume" aria-controls="volume-slider" ng-change="$ctrl.setVolume(renderer.id, vol)">
+					</md-input-container>
+					<md-slider ng-model="vol" min="0" max="100" aria-label="volume" id="volume-slider" class="md-accent" md-vertical md-range
+						ng-change="$ctrl.setVolume(renderer.id, vol)" style="margin-left:8px;"></md-slider>
+
+					<h5 style="margin-left:8px;">Volume</h5>
+				</md-slider-container>
+
+				<hr style="width:200px; -webkit-margin-before: 0em; margin-left:0; margin-top:5px;">
+			</div>
+
+			<div>
+				<img ng-click="$ctrl.play(renderer.id)" ng-src="images/play.svg" style="width:50px; height:50px; " alt="playBtn"></img>
+				<img ng-click="$ctrl.pause(renderer.id)" ng-src="images/pause.svg" style="width:50px; height:50px; margin-left:16px;" alt="pauseBtn"></img>
+				<img ng-click="$ctrl.stop(renderer.id)" ng-src="images/stop.svg" style="width:50px; height:50px; margin-left:16px;" alt="stopBtn"></img>
+			</div>
+
+		</details>
+	</li>
+</ul>
