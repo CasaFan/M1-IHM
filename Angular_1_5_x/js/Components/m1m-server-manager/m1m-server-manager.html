@@ -1,31 +1,34 @@
 <ul>
-        <li ng-repeat="server in $ctrl.mediaServers">
-            <details>
-                <summary>{{server.name}}</summary>
-                <p ng-dblclick="$ctrl.browse(server.id)">
-                    <!-- {{server | json}} -->
-                    <img ng-src="{{server.iconURL}}" alt="serverIcon" style="width:100px; height:100px; "/>
-                </p>
-                <div ng-repeat="obj in $ctrl.directories" ng-dblclick="$ctrl.browse(server.id, obj.directory)" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
-                    <img ng-src="images/folder.png" style="width:50px; height:50px; "/>
-                    <label style="display: block;">{{obj.name}}</label>
-                </div>
-                <!-- media = {
+	<li ng-repeat="server in $ctrl.mediaServers">
+		<details>
+			<summary>{{server.name}}</summary>
+			<p ng-dblclick="$ctrl.browse(server.id)">
+				<!-- {{server | json}} -->
+				<img ng-src="{{server.iconURL}}" alt="serverIcon" style="width:100px; height:100px; " />
+			</p>
+			<div>
+				<img ng-click="$ctrl.browseParentDir(server.id, $ctrl.parentDir)" ng-src="images/keyboard_backspace_black.svg" /-->
+			</div>
+			<div ng-repeat="obj in $ctrl.directories" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
+				<div>
+					<img ng-dblclick="$ctrl.browse(server.id, obj.directory)" ng-src="images/folder.png" style="width:50px; height:50px; " />
+					<label style="display: block;">{{obj.name}}</label>
+				</div>
+			</div>
+			<!-- media = {
                         serverId, date, title, icon, mediaId, 
                         creator, actors, genres, albumarturi, 
                         description, longdescription, 
                         ressource, class} 
                         -->
 
-                <!-- loadMedia   : function(mediaRendererId, mediaServerId /*media.serverId*/, itemId /*(media.mediaId)*/) -->
+			<div ng-repeat="media in $ctrl.medias" ng-drag-data="{{media}}" data-allow-transform="true" ng-drag="true" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
+				<img ng-src="{{media.icon}}" />
+				<label style="display: block; text-align: center;">{{media.title}}</label>
+			</div>
 
-                <div ng-repeat="media in $ctrl.medias" ng-drag-data="{{media}}" data-allow-transform="true" ng-drag="true" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
-                    <img ng-src="{{media.icon}}" />
-                    <label style="display: block; text-align: center;">{{media.title}}</label>
-                </div> 
-
-                <!-- TODO module : media(display) -->
-                <!-- m1m-media-module></m1m-media-module-->
-            </details>
-        </li>
-    </ul>
+			<!-- TODO module : media(display) -->
+			<!-- m1m-media-module></m1m-media-module-->
+		</details>
+	</li>
+</ul>
