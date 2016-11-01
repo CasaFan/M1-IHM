@@ -7,7 +7,7 @@
 				<img ng-src="{{server.iconURL}}" alt="serverIcon" style="width:100px; height:100px; " />
 			</p>
 			<div>
-				<img ng-click="$ctrl.browseParentDir(server.id, $ctrl.parentDir)" ng-src="images/keyboard_backspace_black.svg" /-->
+				<img ng-click="$ctrl.browse(server.id, parentDir)" ng-src="images/keyboard_backspace_black.svg" /-->
 			</div>
 			<div ng-repeat="obj in $ctrl.directories" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
 				<div>

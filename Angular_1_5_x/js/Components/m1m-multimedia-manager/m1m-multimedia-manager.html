@@ -1,72 +1,57 @@
-<h2>{{$ctrl.title}}</h2>
+<div layout="column" style="height:100%;" ng-cloak>
+	<section layout="row" flex>
 
-<section>
-    <h3>Liste des lecteurs UPnP/DLNA</h3>
-    <!--m1m-mediaRender-manager></m1m-mediaRender-manager-->
-    <ul>
-        <li ng-repeat="renderer in $ctrl.mediaRenderers">
-            <details>
-                <summary>{{renderer.name}}</summary>
-                <!-- {{renderer | json}} -->
+		<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
 
-                <div>
-                    <img ng-src="{{renderer.iconURL}}" ng-drop="true" ng-drop-success="$ctrl.loadMedia(renderer.id, $data.serverId, $data.mediaId)" alt="deviceIcon" style="width:200px; height:200px;" />
-                    
-                    <md-slider-container flex style="display:inline-block; margin-left:50px; -webkit-inline-box">
-                    <md-input-container>
-                        <input flex type="number" ng-model="vol" aria-label="volume" aria-controls="volume-slider" ng-change="$ctrl.setVolume(renderer.id, vol)">
-                    </md-input-container>
-                    <md-slider ng-model="vol" min="0" max="100" aria-label="volume" id="volume-slider" class="md-accent" md-vertical md-range ng-change="$ctrl.setVolume(renderer.id, vol)" style="margin-left:8px;"></md-slider>
-                    
-                    <h5 style="margin-left:8px;">Volume</h5>
-                    </md-slider-container>
+			<md-toolbar style="background-color:#19ad89;">
+				<h3 class="md-toolbar-tools">Liste des Lecteurs UPnP/DLNA</h1>
+			</md-toolbar>
+			<md-content layout-padding>
+				<div class="renderers" ng-repeat="renderer in $ctrl.mediaRenderers" ng-click="$ctrl.setRenderer(renderer.id)" ng-drop="true"
+					ng-drop-success="$ctrl.loadMedia(renderer.id, $data.serverId, $data.mediaId)" style="height:70px; text-align:center; border: 1px #eeeeee solid; margin-bottom:10px;">
 
-                    <hr style="width:200px; -webkit-margin-before: 0em; margin-left:0; margin-top:5px;">
-                </div>
+					{{renderer.name}}
+				</div>
+			</md-content>
 
-                <div>
-                    <img ng-click="$ctrl.play(renderer.id)" ng-src="images/play.svg" style="width:50px; height:50px; " alt="playBtn"></img>
-                    <img ng-click="$ctrl.pause(renderer.id)" ng-src="images/pause.svg" style="width:50px; height:50px; margin-left:16px;" alt="pauseBtn"></img>
-                    <img ng-click="$ctrl.stop(renderer.id)" ng-src="images/stop.svg" style="width:50px; height:50px; margin-left:16px;" alt="stopBtn"></img>
-                </div>
-                
-            </details>
-        </li>
-    </ul-->
-</section>
+		</md-sidenav>
 
-<section>
-    <h3>Liste des serveurs UPnP/DLNA</h3>
-    <m1m-server-manager></m1m-server-manager>
-    <!--ul>
-        <li ng-repeat="server in $ctrl.mediaServers">
-            <details>
-                <summary>{{server.name}}</summary>
-                <p ng-dblclick="$ctrl.browse(server.id)">
-                    <!-- {{server | json}} >
-                    <img ng-src="{{server.iconURL}}" alt="serverIcon" style="width:100px; height:100px; "/>
-                </p>
-                <div ng-repeat="obj in $ctrl.directories" ng-dblclick="$ctrl.browse(server.id, obj.directory)" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
-                    <img ng-src="images/folder.png" style="width:50px; height:50px; "/>
-                    <label style="display: block;">{{obj.name}}</label>
-                </div>
-                <!-- media = {
-                        serverId, date, title, icon, mediaId, 
-                        creator, actors, genres, albumarturi, 
-                        description, longdescription, 
-                        ressource, class} 
-                        -->
+		<md-content flex layout-padding>
 
-                <!-- loadMedia   : function(mediaRendererId, mediaServerId /*media.serverId*/, itemId /*(media.mediaId)*/) >
+			<div layout="column" layout-align="top center">
+				<!-- Serveur section-->
+				<section>
+					<h3>Liste des serveurs UPnP/DLNA</h3>
+					<m1m-server-manager></m1m-server-manager>
+				</section>
+			</div>
+			<div ng-cloak id="player-wrap" class="fixed-player" style="position:fixed; height: 50px;background-color: #00a57d; opacity: 0.9; width:100%; bottom:10px;margin-bottom:0px; border-radius:5px;">
+				<!-- TODO : player buffer -->
+				<!--div id="buffered"></div-->
+	
+				<!-- icons -->
+				<!-- TODO : addFavorite -->
+				<ng-md-icon icon="favorite" size="40" ng-click="$ctrl.print()" style="fill:white;margin-left:5%;"></ng-md-icon>
 
-                <div ng-repeat="media in $ctrl.medias" ng-drag-data="{{media}}" data-allow-transform="true" ng-drag="true" style="display: inline-block; margin-right: 20px; margin-bottom: 20px;">
-                    <img ng-src="{{media.icon}}" />
-                    <label style="display: block; text-align: center;">{{media.title}}</label>
-                </div> 
+				<span style="color:white; text-align:center; margin-left:5%; position:absolute; margin-top:7px;width:285px;">{{currentMediaData.title.__text}}</span>
+				<ng-md-icon icon="pause" ng-show="playing" size="40" ng-click="$ctrl.pause()" style="fill:white;margin-left:35%;"></ng-md-icon>
+				<ng-md-icon icon="play_arrow" ng-hide="playing" size="40" ng-click="$ctrl.play()" style="fill:white;margin-left:35%;"></ng-md-icon>
+				<ng-md-icon icon="stop" size="40" ng-click="$ctrl.stop()" style="fill:white;margin-left:50px;"></ng-md-icon>
 
-                <!-- TODO module : media(display) -->
-                <!-- m1m-media-module></m1m-media-module>
-            </details>
-        </li>
-    </ul-->
-</section>
+				<!-- setVolume slider -->
+				<div ng-cloak layout style="width: 150px;height40px; position:absolute; display:inline-block;margin-left:8%;">
+					<!--div flex="10" layout layout-align="center center">
+						<span class="md-body-1">Volume</span>
+					</div-->
+					<md-slider flex md-discrete ng-model="volume" step="1" min="0" max="100" aria-label="volumeSetting" ng-change="$ctrl.setVolume(volume)" style="width:125px;">
+					</md-slider>
+				</div>
+			</div>
+
+			<div flex></div>
+
+		</md-content>
+
+	</section>
+
+</div>

@@ -11,7 +11,6 @@ console.log( "Init of m1m-server-manager-Module", CommModule, angularMaterial, n
 function controller($scope, CommService) {
     
     var ctrl = this;
-    ctrl.parentDir = null;
 
     console.log( "m1mServerManager:", $scope, CommService );
     
@@ -22,11 +21,12 @@ function controller($scope, CommService) {
         $scope.$applyAsync(); // Mise à jour du rendu
     };
     this.browse = function( mediaServerId, directoryId ) {
+        //var parentDir;
         CommService.browse( mediaServerId, directoryId ).then( function(data) {
             console.log( "Browse", mediaServerId, directoryId, "=>", data );
             ctrl.directories = data.directories;
-            ctrl.parentDir = data.parentDirectory;
-            //this.parentDir = directoryId;
+            //ctrl.parentDir = data.parentDirectory;
+            //parentDir = data.parentDirectory;
             ctrl.medias = data.medias;
             $scope.$applyAsync();
         });
@@ -51,6 +51,6 @@ controller.$inject = ["$scope", "CommService"];
 angular .module     ( module.exports, [CommModule, angularMaterial, "ngDraggable"] )
         .component  ( "m1mServerManager", {
             controller  : controller,
-            //bindings    : {title: "@"},
+            bindings    : {title: "@"},
             template	: template
         });
