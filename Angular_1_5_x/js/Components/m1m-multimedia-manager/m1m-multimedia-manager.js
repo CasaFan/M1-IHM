@@ -30,7 +30,7 @@ function controller($scope, CommService) {
 
     //TODO : try no render catch err
     $scope.currentRenderId = "";
-    // TODO : getVolumeLecteur
+    
 
     CommService.onupdate = function () {
         $scope.$applyAsync(); // Mise à jour du rendu
@@ -41,10 +41,10 @@ function controller($scope, CommService) {
         this.getEtatLecteur(mediaRendererId);
         console.log("set rendererId : ", mediaRendererId);
     }
-    /*this.print = function () {
+    this.test = function () {
         console.log("coucou");
     }
-    */
+    
 
     this.play = function () {
         CommService.play($scope.currentRenderId);
@@ -90,15 +90,14 @@ function controller($scope, CommService) {
         utils.call(mediaRenderId, "getMediasStates", []).then(function (data) {
             console.log("dataGot =>", data);
             this.currentAVT = data['urn:schemas-upnp-org:service:AVTransport:1'];
-            // getMediaName
-            /*this.mediaName = function (this.currentAVT['CurrentTrackMetaData']) {
-
-            };
-            */
+            
+            // getMediaName by parsing xml metaData to json
             var x2js = new X2JS();
             this.currentMediaMetaData = x2js.xml_str2json(this.currentAVT['CurrentTrackMetaData']);
             $scope.currentMediaData = this.currentMediaMetaData['DIDL-Lite'].item;
             console.log("media", this.currentMediaMetaData['DIDL-Lite'].item.title.__text);
+
+            // if status OK getState
             if (this.currentAVT['TransportStatus'] == "OK") {
                 switch (this.currentAVT['TransportState']) {
                     case "PAUSED_PLAYBACK":
@@ -117,6 +116,7 @@ function controller($scope, CommService) {
                 console.log("renderer err");
             }
 
+            //get volumeEtat & bind in scope
             this.currentRenderingControl = data['urn:schemas-upnp-org:service:RenderingControl:1'];
             $scope.volume = parseInt(this.currentRenderingControl['Volume'], 10);
         });
