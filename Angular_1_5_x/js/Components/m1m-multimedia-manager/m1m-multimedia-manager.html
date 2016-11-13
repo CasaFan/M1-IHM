@@ -18,22 +18,25 @@
 
 		<md-content flex layout-padding>
 
-			<div layout="column" layout-align="top center">
+			<div layout="column">
 				<!-- Serveur section-->
-				<section>
-					<h3>Liste des serveurs UPnP/DLNA</h3>
-					<m1m-server-manager></m1m-server-manager>
-				</section>
+				<m1m-server-manager></m1m-server-manager>
 			</div>
-			<div ng-cloak id="player-wrap" class="fixed-player" style="position:fixed; height: 50px;background-color: #00a57d; opacity: 0.9; width:100%; bottom:10px;margin-bottom:0px; border-radius:5px;">
+
+			<!-- player --> 
+			<div ng-cloak id="player-wrap" class="fixed-player" style="position:fixed; height: 50px;background-color: #00a57d; opacity: 0.9; width:100%; bottom:10px;margin-bottom:0px; border-radius:5px;" >
 				<!-- TODO : player buffer -->
-				<!--div id="buffered"></div-->
+				<!--div class="buffer" style="background-color:#c4c4c4; width:100%; height:1px;"></div>
+				<div class="buffer" style="background-color:#ff538d;height:1px;"></div-->
 	
 				<!-- icons -->
 				<!-- TODO : addFavorite -->
 				<ng-md-icon icon="favorite" size="40" ng-click="$ctrl.print()" style="fill:white;margin-left:5%;"></ng-md-icon>
-
-				<span style="color:white; text-align:center; margin-left:5%; position:absolute; margin-top:7px;width:285px;">{{currentMediaData.title.__text}}</span>
+				<!-- TODO : fix timer >
+				<span style="color:white; text-align:center; margin-left:5%; position:absolute; margin-top:7px;width:285px;">{{currentMediaData.title.__text}} 
+					<timer ng-cloak countdown="mediaLength" autostart="true" interval="1000">-{{hours}}:{{minutes}}:{{seconds}}</timer>
+				</span-->
+				
 				<ng-md-icon icon="pause" ng-show="playing" size="40" ng-click="$ctrl.pause()" style="fill:white;margin-left:35%;"></ng-md-icon>
 				<ng-md-icon icon="play_arrow" ng-hide="playing" size="40" ng-click="$ctrl.play()" style="fill:white;margin-left:35%;"></ng-md-icon>
 				<ng-md-icon icon="stop" size="40" ng-click="$ctrl.stop()" style="fill:white;margin-left:50px;"></ng-md-icon>
@@ -43,11 +46,9 @@
 					<!--div flex="10" layout layout-align="center center">
 						<span class="md-body-1">Volume</span>
 					</div-->
-					<md-slider flex md-discrete ng-model="volume" step="1" min="0" max="100" aria-label="volumeSetting" ng-change="$ctrl.setVolume(volume)" style="width:125px;">
-					</md-slider>
+					<md-slider flex md-discrete ng-model="volume" step="1" min="0" max="100" aria-label="volumeSetting" ng-change="$ctrl.setVolume(volume)" style="width:125px;"></md-slider>
 				</div>
 			</div>
-
 			<div flex></div>
 
 		</md-content>

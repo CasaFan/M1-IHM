@@ -3,6 +3,7 @@ var angular = require("angular"),
     angularMaterial = require("angular-material"),
     ngDraggable = require("ng-draggable"),
     template = require("./m1m-multimedia-manager.html"),
+    //moment = require("./../../../bower_components/moment/min/moment.min.js"),
     //m1mMediaRenders     = require("./../m1m-mediaRender-manager/m1m-mediaRender-manager.js"),
     m1mServers = require("./../m1m-server-manager/m1m-server-manager.js")
     ;
@@ -16,6 +17,8 @@ function controller($scope, CommService) {
     var ctrl = this;
     
     $scope.playing = false;
+    $scope.mediaLength = 0;
+    $scope.timerRunning = false;
 
     this.currentMedia;
     this.currentAVT;
@@ -40,6 +43,7 @@ function controller($scope, CommService) {
         $scope.currentRenderId = mediaRendererId;
         this.getEtatLecteur(mediaRendererId);
         console.log("set rendererId : ", mediaRendererId);
+        
     }
     this.test = function () {
         console.log("coucou");
@@ -73,29 +77,28 @@ function controller($scope, CommService) {
 
         //autoplay when dropped
         this.play(mediaRendererId);
+        $scope.$broadcast('timer-start');
         console.log("media loaded ");
     }
     /**
-     * AVTransport: CurrentMediaDuration
-     *              CurrentTrackDuration 
-     *              CurrentTrackMetaData //mediaData
-     *              TransportState //rendererState 
-     *              TransportStatus //OK 
+     * get etat courrant du lecteur 
      * 
-     * RenderingControl: Mute "0"
-     *                  Volume,
-     *                  VolumeDB (?)
      */
     this.getEtatLecteur = function (mediaRenderId) {
         utils.call(mediaRenderId, "getMediasStates", []).then(function (data) {
             console.log("dataGot =>", data);
             this.currentAVT = data['urn:schemas-upnp-org:service:AVTransport:1'];
             
+            // TODO : get current media length
+            /*var momento = new moment(this.currentAVT['CurrentMediaDuration'], "HH:mm:ss");
+            $scope.mediaLength =  momento.hours()*3600 + momento.minutes()*60 + momento.seconds();
+            console.log("mediaLength : ", $scope.mediaLength);
+            */
             // getMediaName by parsing xml metaData to json
             var x2js = new X2JS();
             this.currentMediaMetaData = x2js.xml_str2json(this.currentAVT['CurrentTrackMetaData']);
             $scope.currentMediaData = this.currentMediaMetaData['DIDL-Lite'].item;
-            console.log("media", this.currentMediaMetaData['DIDL-Lite'].item.title.__text);
+            console.log("media", this.currentMediaMetaData);
 
             // if status OK getState
             if (this.currentAVT['TransportStatus'] == "OK") {
@@ -124,7 +127,7 @@ function controller($scope, CommService) {
 }
 controller.$inject = ["$scope", "CommService"];
 
-angular.module(module.exports, [CommModule, angularMaterial, "ngDraggable", m1mServers, 'ngMdIcons'])
+angular.module(module.exports, [CommModule, angularMaterial, "ngDraggable", m1mServers, 'ngMdIcons', 'timer'])
     .component("m1mMultimediaManager", {
         controller: controller,
         bindings: {
