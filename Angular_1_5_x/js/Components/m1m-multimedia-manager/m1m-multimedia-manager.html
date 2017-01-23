@@ -1,17 +1,19 @@
 <div layout="column" style="height:100%;" ng-cloak>
 	<section layout="row" flex>
 
-		<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4">
+		<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('min-width:1000px')" md-whiteframe="4">
 
 			<md-toolbar style="background-color:#19ad89;">
 				<h3 class="md-toolbar-tools">Liste des Lecteurs UPnP/DLNA</h1>
 			</md-toolbar>
-			<md-content layout-padding>
-				<div class="renderers" ng-repeat="renderer in $ctrl.mediaRenderers" ng-click="$ctrl.setRenderer(renderer.id)" ng-drop="true"
-					ng-drop-success="$ctrl.loadMedia(renderer.id, $data.serverId, $data.mediaId)" style="height:70px; text-align:center; border: 1px #eeeeee solid; margin-bottom:10px;">
 
+			<md-content layout-padding>
+
+				<div class="renderers" ng-repeat="renderer in $ctrl.mediaRenderers" ng-click="$ctrl.setRenderer(renderer.id, this)" ng-drop="true"
+					ng-drop-success="$ctrl.loadMedia(renderer.id, $data.serverId, $data.mediaId)" ng-style="renderStyle">
 					{{renderer.name}}
 				</div>
+				
 			</md-content>
 
 		</md-sidenav>
@@ -23,32 +25,36 @@
 				<m1m-server-manager></m1m-server-manager>
 			</div>
 
-			<!-- player --> 
-			<div ng-cloak id="player-wrap" class="fixed-player" style="position:fixed; height: 50px;background-color: #00a57d; opacity: 0.9; width:100%; bottom:10px;margin-bottom:0px; border-radius:5px;" >
+			<!-- player -->
+			<div id="playerDiv" ng-cloak id="player-wrap" class="fixed-player">
 				<!-- TODO : player buffer -->
 				<!--div class="buffer" style="background-color:#c4c4c4; width:100%; height:1px;"></div>
 				<div class="buffer" style="background-color:#ff538d;height:1px;"></div-->
-	
+
 				<!-- icons -->
 				<!-- TODO : addFavorite -->
-				<ng-md-icon icon="favorite" size="40" ng-click="$ctrl.print()" style="fill:white;margin-left:5%;"></ng-md-icon>
-				<!-- TODO : fix timer >
-				<span style="color:white; text-align:center; margin-left:5%; position:absolute; margin-top:7px;width:285px;">{{currentMediaData.title.__text}} 
-					<timer ng-cloak countdown="mediaLength" autostart="true" interval="1000">-{{hours}}:{{minutes}}:{{seconds}}</timer>
-				</span-->
-				
-				<ng-md-icon icon="pause" ng-show="playing" size="40" ng-click="$ctrl.pause()" style="fill:white;margin-left:35%;"></ng-md-icon>
-				<ng-md-icon icon="play_arrow" ng-hide="playing" size="40" ng-click="$ctrl.play()" style="fill:white;margin-left:35%;"></ng-md-icon>
-				<ng-md-icon icon="stop" size="40" ng-click="$ctrl.stop()" style="fill:white;margin-left:50px;"></ng-md-icon>
+				<ng-md-icon id="favorite" icon="favorite" size="40" ng-click="$ctrl.print()"></ng-md-icon>
+				<!-- TODO : fix timer -->
+				<span id="currentMediaSpan">{{currentMediaData.title.__text}} 
+					<!--timer ng-cloak countdown="mediaLength" autostart="true" interval="1000">-{{hours}}:{{minutes}}:{{seconds}}</timer-->
+				</span>
 
+				<ng-md-icon class="player_btn" icon="pause" ng-show="playing" size="40" ng-click="$ctrl.pause()"></ng-md-icon>
+				<ng-md-icon class="player_btn" icon="play_arrow" ng-hide="playing" size="40" ng-click="$ctrl.play()"></ng-md-icon>
+				<ng-md-icon id="player_stop" icon="stop" size="40" ng-click="$ctrl.stop()"></ng-md-icon>
+
+				<ng-md-icon class="volumeBtn" icon="volume_up" ng-show="volume" size="30"></ng-md-icon>
+				<ng-md-icon class="volumeBtn" icon="volume_off" ng-hide="volume" size="30"></ng-md-icon>
 				<!-- setVolume slider -->
-				<div ng-cloak layout style="width: 150px;height40px; position:absolute; display:inline-block;margin-left:8%;">
-					<!--div flex="10" layout layout-align="center center">
-						<span class="md-body-1">Volume</span>
-					</div-->
-					<md-slider flex md-discrete ng-model="volume" step="1" min="0" max="100" aria-label="volumeSetting" ng-change="$ctrl.setVolume(volume)" style="width:125px;"></md-slider>
+				<div id="volumeSliderDiv" ng-cloak layout>
+
+					<md-slider flex md-discrete ng-model="volume" step="1" min="0" max="100" aria-label="volumeSetting" ng-change="$ctrl.setVolume(volume)"
+						style="width:125px;">
+					</md-slider>
+
 				</div>
 			</div>
+
 			<div flex></div>
 
 		</md-content>

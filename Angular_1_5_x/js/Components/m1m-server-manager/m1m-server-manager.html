@@ -5,34 +5,35 @@
 	</md-nav-bar>
 
 	<!-- content div -->
-	<div class="ext-content" style="margin-top:15px; margin-left:20px;">
+	<div class="ext-content">
 		<!-- Content For server <span>{{currentServerID}}</span-->
 		<div id="divPath">
 			<!-- homePath Btn -->
-			<md-button class="homePathBtn" ng-click="$ctrl.goto(currentServerID)" style="min-height:30px; min-width:50px; line-height:20px;">
-				<ng-md-icon icon="home" ng-click="$ctrl.goto(currentServerID)" size="30" style="fill:#ff4081;"></ng-md-icon>
+			<md-button ng-show="showHome" class="homePathBtn" ng-click="$ctrl.browse(currentServerID, true)">
+				<ng-md-icon icon="home" size="30" style="fill:#ff4081;"></ng-md-icon>
 			</md-button>
 			<!-- path btns -->
-			<md-button class="btnPath" ng-repeat="dir in listDirectories" ng-click="$ctrl.browse(currentServerID, dir.dirID)" style="font-size:16px; -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%); clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%); color: #ff4081; padding-right: 15px;"><span style="margin-left: 5px; padding-right:20px;">{{dir.name}}</span></md-button>
-		</div>
-		<!--ng-md-icon ng-click="$ctrl.browseGrandPa(currentServerID)" icon="navigate_before" style="fill:#19ad89" size="40"></ng-md-icon-->
-		<br>
-		<div id="directoriesDiv" style="margin-top:5px; margin-left:25px;">
-			<!-- margin-right: 20px; margin-bottom: 20px;-->
-			<div ng-repeat="obj in $ctrl.directories" style="display: inline-block; width: 110px; height:75px; margin-right: 20px; margin-bottom: 20px; text-align:center; overflow: hidden;">
-				
-					<img ng-dblclick="$ctrl.browse(currentServerID, obj.directory, obj.name)" ng-src="images/folder.png" style="width:50px; height:50px;"
-					/>
-					<label style="display: block; text-align:center; height:50px;">{{obj.name}}</label>
-				
-			</div>
+			<md-button class="btnPath" ng-repeat="dir in listDirectories" ng-click="$ctrl.browse(currentServerID,false, dir.dirID)"><span class="directoryPathBtn">{{dir.name}}</span></md-button>
 		</div>
 
-		<div ng-repeat="media in $ctrl.medias" ng-drag-data="{{media}}" data-allow-transform="true" ng-drag="true" style="display: inline-block; margin-top:5px; margin-left:25px; margin-right: 20px; margin-bottom: 20px;">
-			
-			<img ng-src="{{media.icon}}" style="margin-bottom:10px;" />
-			<label style="display: block; text-align: center;">{{media.title}}</label>
+		<br>
+
+		<div class="directoriesDiv">
+
+			<div class="directoriesDiv2" ng-repeat="obj in $ctrl.directories">
+				<img class="folderImg" ng-dblclick="$ctrl.browse(currentServerID,false, obj.directory, obj.name)" ng-src="images/folder.png"
+				/>
+				<label class="folderName">{{obj.name}}</label>
+			</div>
+
 		</div>
-		
+
+		<div class="mediaDiv" ng-repeat="media in $ctrl.medias" ng-drag-data="{{media}}" data-allow-transform="true" ng-drag="true">
+
+			<img class="mediaIcon" ng-src="{{media.icon}}" ng-click="$ctrl.openDescription($event, media)" />
+			<label class="mediaTitle">{{media.title}}</label>
+
+		</div>
+
 	</div>
 </div>
