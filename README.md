@@ -8,8 +8,8 @@ These instructions will get you a copy of the project up and running on your loc
 See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
-* Docker
-* Npm
+* [Docker](https://www.docker.com)
+* [Npm](https://www.npmjs.com)
 * Gulp
 
 ### Installing
@@ -32,10 +32,10 @@ yourPC@name:~[PathToProject]$ sudo docker run -ti --n=host --volume [PathToProje
 ```  
 * Open a browser and go to localhost:8888  
 
-## Some screenshots  
+### Some screenshots  
 ![Alt text](/screenshots/img1.png?raw=true "initiated screen with servers online")  
 ![Alt text](/screenshots/img2.png?raw=true "device detected")  
-![Alt text](/screenshots/img3.png?raw=true "control of device")
+![Alt text](/screenshots/img3.png?raw=true "control of device")  
 ![Alt text](/screenshots/img4.png?raw=true "media detail")  
 
 ## Build With
