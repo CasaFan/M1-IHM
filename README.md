@@ -43,3 +43,6 @@ yourPC@name:~[PathToProject]$ sudo docker run -ti --n=host --volume [PathToProje
 * [AngularMaterial](https://material.angularjs.org) - The UI fromework used  
 * [NodeJS](https://nodejs.org) - Used for backend developpement (by [AlexDmr](https://github.com/AlexDmr))  
 * [Docker](https://www.docker.com) - The container used for the Front development environment  
+
+## To impove
+* Responsibility (ex.mobile browser)  
