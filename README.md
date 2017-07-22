@@ -1,7 +1,5 @@
 # Project AngularJS
 Web application to control connected media devices (Upnp protocol)  
-Front : AngularJS 1.5, Angular Material.  
-Backend developeled in Node.js in container Docker by [AlexDmr](https://github.com/AlexDmr)  
 
 ## Getting Started 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
@@ -28,7 +26,7 @@ yourPC@name:~[PathToProject]$ gulp
 ```  
 * Run the server in docker with the client code
 ```
-yourPC@name:~[PathToProject]$ sudo docker run -ti --n=host --volume [PathToProject]/M1-IHM/Angular_1_5_x:/tacthab/client/ alexd2/m1m-serveur
+yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToProject]/M1-IHM/Angular_1_5_x:/tacthab/client/ alexd2/m1m-serveur
 ```  
 * Open a browser and go to localhost:8888  
 
@@ -38,7 +36,7 @@ yourPC@name:~[PathToProject]$ sudo docker run -ti --n=host --volume [PathToProje
 ![Alt text](/screenshots/img3.png?raw=true "control of device")  
 ![Alt text](/screenshots/img4.png?raw=true "media detail")  
 
-## Build With
+## Stack
 * [AngularJS 1.5](https://angularjs.org/) - The JS framework used  
 * [AngularMaterial](https://material.angularjs.org) - The UI fromework used  
 * [NodeJS](https://nodejs.org) - Used for backend developpement (by [AlexDmr](https://github.com/AlexDmr))  
