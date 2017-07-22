@@ -26,7 +26,7 @@ yourPC@name:~[PathToProject]$ gulp
 ```  
 * Run the server in docker with the client code
 ```
-yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToProject]/M1-IHM/Angular_1_5_x:/tacthab/client/ alexd2/m1m-serveur
+yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToProject]/Media-Control-Application/Angular_1_5_x:/tacthab/client/ alexd2/m1m-serveur
 ```  
 * Open a browser and go to localhost:8888  
 
