@@ -32,8 +32,11 @@ yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToPro
 
 ## Some screenshots  
 ![Alt text](/screenshots/img1.png?raw=true "initiated screen with servers online")  
+  
 ![Alt text](/screenshots/img2.png?raw=true "device detected")  
+  
 ![Alt text](/screenshots/img3.png?raw=true "control of device")  
+  
 ![Alt text](/screenshots/img4.png?raw=true "media detail")  
 
 ## Stack
