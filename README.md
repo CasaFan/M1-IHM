@@ -32,17 +32,23 @@ yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToPro
 
 ## Some screenshots  
 ![Alt text](/screenshots/img1.png?raw=true "initiated screen with servers online")  
-  
+            ----- initiated screen with servers online -----  
+
 ![Alt text](/screenshots/img2.png?raw=true "device detected")  
+            ----- device detected -----  
   
 ![Alt text](/screenshots/img3.png?raw=true "control of device")  
+            ----- control of device -----  
   
 ![Alt text](/screenshots/img4.png?raw=true "media detail")  
+            ----- media detail -----  
 
 ## Stack
+### Front
 * [AngularJS 1.5](https://angularjs.org/) - The JS framework used  
 * [AngularMaterial](https://material.angularjs.org) - The UI fromework used  
-* [NodeJS](https://nodejs.org) - Used for backend developpement (by [AlexDmr](https://github.com/AlexDmr))  
+### Back (by [AlexDmr](https://github.com/AlexDmr))
+* [NodeJS](https://nodejs.org) - Used for backend developpement ()  
 * [Docker](https://www.docker.com) - The container used for the Front development environment  
 
 ## To impove
