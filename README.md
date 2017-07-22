@@ -53,3 +53,4 @@ yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToPro
 
 ## To impove
 * Responsibility (ex.mobile browser)  
+* Add favorite media
