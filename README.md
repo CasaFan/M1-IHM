@@ -28,7 +28,7 @@ yourPC@name:~[PathToProject]$ gulp
 ```
 yourPC@name:~[PathToProject]$ sudo docker run -ti --net=host --volume [PathToProject]/Media-Control-Application/Angular_1_5_x:/tacthab/client/ alexd2/m1m-serveur
 ```  
-* Open a browser and go to localhost:8888  
+* Open a browser and go to localhost:8888/client  
 
 ## Some screenshots  
 ![Alt text](/screenshots/img1.png?raw=true "initiated screen with servers online")  
