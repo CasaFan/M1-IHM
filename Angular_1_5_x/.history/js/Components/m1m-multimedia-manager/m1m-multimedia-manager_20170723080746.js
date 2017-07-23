@@ -35,8 +35,7 @@ function controller($scope, CommService) {
     }
 
     var clickedRenderStyle = {
-        'transform' : 'translateY(84.5vh)',
-        'transition': '1.5s ease',
+        /*
         'height': '40px',
         'text-align': 'center',
         'border': '1px #eeeeee solid',
@@ -45,9 +44,11 @@ function controller($scope, CommService) {
         'position': 'fixed',
         'width': '90%',
         'opacity': '0.9',
+        'bottom': '10px',
         'margin-bottom': '0',
         'border-radius': '5px',
-        'color': 'white'
+        'color': 'white',*/
+        'transform' : 'translateY(500px)'
     }
 
     $scope.renderStyle = defautRenderStyle;
